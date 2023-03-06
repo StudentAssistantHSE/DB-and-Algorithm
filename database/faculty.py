@@ -1,0 +1,10 @@
+facultySql = ''' DROP TABLE IF EXISTS faculties CASCADE;
+ CREATE TABLE faculties (
+ ID SERIAL PRIMARY KEY NOT NULL,
+ NAME text NOT NULL,
+ SHORTNAME text NOT NULL
+ )
+ ''';
+
+facultyFill = ''' INSERT INTO faculties (NAME, SHORTNAME) 
+ VALUES('COMPUTER SCIENCE', 'FKN');'''

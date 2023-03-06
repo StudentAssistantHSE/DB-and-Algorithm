@@ -1,0 +1,5 @@
+DB_NAME = 'dsa01'
+DB_USER = 'udsa01'
+DB_PASS = 'HSEP@ssword2022'
+DB_HOST = '84.201.175.11'
+DB_PORT = '5432'
