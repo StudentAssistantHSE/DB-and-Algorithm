@@ -27,9 +27,7 @@ try:
     conn.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
     requests = [facultySql, accountSql, statusSql, projectSql, applicationSql, categorySql, accountInterestsSql,
                  projectCategoriesSql, recommendationSql]
-    fill = [DummyData.facultyFill.facultyFill, DummyData.accountFill.accountFill, statusFill, DummyData.projectFill.projectFill,
-            DummyData.applicationsFill.applicationFill, DummyData.categoryFill.categoryFill, DummyData.accountInterestsFill.accountInterestsFill,
-            DummyData.projectCategoriesFill.projectCategoriesFill]
+    fill = [statusFill]
 
     # executing query
     for request in requests:
