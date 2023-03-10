@@ -4,12 +4,12 @@ import psycopg2
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 from sklearn.metrics.pairwise import cosine_similarity
 
-import database.config_local as config_local
+from database.config import DB_NAME, DB_USER, DB_HOST, DB_PASS, DB_PORT
 from recommendations.SqlRequest import SqlRequest
 from recommendations.AlgorithmOperator import AlgorithmOperator
 
-conn = psycopg2.connect(database=config_local.DB_NAME, user=config_local.DB_USER, port=config_local.DB_PORT, password=config_local.DB_PASS,
-                        host=config_local.DB_HOST)
+conn = psycopg2.connect(database=DB_NAME, user=DB_USER, port=DB_PORT, password=DB_PASS,
+                        host=DB_HOST)
 
 try:
     cursor = conn.cursor()
