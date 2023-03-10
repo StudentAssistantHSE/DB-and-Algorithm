@@ -5,8 +5,8 @@ from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 from sklearn.metrics.pairwise import cosine_similarity
 
 from database.config import DB_NAME, DB_USER, DB_HOST, DB_PASS, DB_PORT
-from database.recommendations.SqlRequest import SqlRequest
-from database.recommendations.AlgorithmOperator import AlgorithmOperator
+from SqlRequest import SqlRequest
+from AlgorithmOperator import AlgorithmOperator
 
 conn = psycopg2.connect(database=DB_NAME, user=DB_USER, port=DB_PORT, password=DB_PASS,
                         host=DB_HOST)
