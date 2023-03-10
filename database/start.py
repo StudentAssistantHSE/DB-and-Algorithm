@@ -1,19 +1,15 @@
 import psycopg2
 import config
-import config_local
-from account import accountSql, accountFill
+from account import accountSql
 from status import statusSql, statusFill
-from project import projectSql, projectFill
-from project_timetable import projectTimetableSql, projectTimetableFill
-from application import applicationSql, applicationFill
-from category import categoryFill, categorySql
-from faculty import facultyFill, facultySql
-import DummyData.facultyFill, DummyData.accountFill, DummyData.projectFill, DummyData.applicationsFill, DummyData.categoryFill,\
-    DummyData.accountInterestsFill, DummyData.projectCategoriesFill
-from project_categories import projectCategoriesFill, projectCategoriesSql
+from project import projectSql
+from application import applicationSql
+from category import categorySql
+from faculty import facultySql
+from project_categories import projectCategoriesSql
 from create_indexes import createIndexes
-from user_categories import accountInterestsFill, accountInterestsSql
-from recommendations import recommendationSql
+from user_categories import accountInterestsSql
+from database.recommendations import recommendationSql
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
 conn = psycopg2.connect(database=config.DB_NAME, user=config.DB_USER, port=config.DB_PORT, password=config.DB_PASS,
