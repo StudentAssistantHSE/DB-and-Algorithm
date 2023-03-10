@@ -1,5 +1,8 @@
 import pandas as pd
 import numpy as np
+import sys
+
+sys.path.append('../')
 import psycopg2
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 from sklearn.metrics.pairwise import cosine_similarity
@@ -22,18 +25,19 @@ try:
     projectsTags = SqlRequest.make_query(cursor, getProjectTagsQuery)
     tagsUnited = list(set().union(*tags))
     df_tf = pd.DataFrame(np.zeros((len(projects), len(tags))), columns=tagsUnited)
-    for i in range(len(projects)+1):
+    for i in range(len(projects) + 1):
         getTagsOfCurrentProject = 'Select * from project_categories where project_id = %s'
         tagsOfProject = SqlRequest.make_query(cursor, getTagsOfCurrentProject, i)
         if len(tagsOfProject) != 0:
-            df_tf[tags[tagsOfProject[0][1] - 1][0]][tagsOfProject[0][0]-1] = df_tf[tags[tagsOfProject[0][1] - 1][0]][tagsOfProject[0][0]-1] +\
-                                                                   (1 / len(tagsOfProject))
+            df_tf[tags[tagsOfProject[0][1] - 1][0]][tagsOfProject[0][0] - 1] = df_tf[tags[tagsOfProject[0][1] - 1][0]][
+                                                                                   tagsOfProject[0][0] - 1] + \
+                                                                               (1 / len(tagsOfProject))
 
     idf = {}
-    for tag in range(1, len(tags)+1):
+    for tag in range(1, len(tags) + 1):
         getProjectsWithTag = 'Select * from project_categories where category_id = %s'
         projectsWithTag = SqlRequest.make_query(cursor, getProjectsWithTag, tag)
-        idf[tags[tag-1][0]] = np.log10(len(projects)/len(projectsWithTag))
+        idf[tags[tag - 1][0]] = np.log10(len(projects) / len(projectsWithTag))
 
     df_tf_idf = df_tf.copy()
 
@@ -42,7 +46,7 @@ try:
             df_tf_idf[tag[0]][i] = df_tf[tag[0]][i] * idf[tag[0]]
 
     res = pd.DataFrame(cosine_similarity(df_tf_idf))
-    indexes = res.apply(AlgorithmOperator.get_top_indexes, axis=1) # Проекты со схожими тегами, без прибавки единицы
+    indexes = res.apply(AlgorithmOperator.get_top_indexes, axis=1)  # Проекты со схожими тегами, без прибавки единицы
 
     getUsersApplicationsQuery = 'SELECT applications.applicant_id, applications.project_id ' \
                                 'FROM applications ' \
@@ -75,7 +79,6 @@ try:
                                   'ORDER BY RANDOM() ' \
                                   'LIMIT 1;'
 
-
     allUsers = SqlRequest.make_query(cursor, getAllUsersQuery)
     recommend = {}
     for i in range(len(allUsers)):
@@ -90,7 +93,7 @@ try:
             apps = dictApplications.get(simularStudent[0][0])
             temp = []
             for el in apps:
-                temp.append(el-1)
+                temp.append(el - 1)
             recommend.update({allUsers[i][0]: temp})
 
     for i in range(len(allUsers)):
@@ -99,14 +102,14 @@ try:
             apps = dictApplications.get(simularStudent[0][0])
             temp = []
             for el in apps:
-                temp.append(el-1)
+                temp.append(el - 1)
             recommend.update({allUsers[i][0]: temp})
 
     for key in recommend.keys():
         recommended_projects = list(set(recommend[key]))
         for i in range(len(recommended_projects)):
             query = 'Insert into user_recommendations (user_id, project_id) values (%s, %s);'
-            cursor.execute(query, (key, recommended_projects[i]+1))
+            cursor.execute(query, (key, recommended_projects[i] + 1))
     print('e')
 
 
