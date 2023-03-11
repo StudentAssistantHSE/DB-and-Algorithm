@@ -33,7 +33,10 @@ try:
     for tag in range(1, len(tags)+1):
         getProjectsWithTag = 'Select * from project_categories where category_id = %s'
         projectsWithTag = SqlRequest.make_query(cursor, getProjectsWithTag, tag)
-        idf[tags[tag-1][0]] = np.log10(len(projects)/len(projectsWithTag))
+        if len(projectsWithTag) != 0:
+            idf[tags[tag-1][0]] = np.log10(len(projects)/len(projectsWithTag))
+        else:
+            idf[tags[tag - 1][0]] = 0
 
     df_tf_idf = df_tf.copy()
 
@@ -75,6 +78,8 @@ try:
                                   'ORDER BY RANDOM() ' \
                                   'LIMIT 1;'
 
+    getUserFacultyQuery = 'Select Faculty_id from users where id = %s'
+
 
     allUsers = SqlRequest.make_query(cursor, getAllUsersQuery)
     recommend = {}
@@ -86,32 +91,38 @@ try:
                 temp.extend(indexes[el - 1])
             recommend.update({allUsers[i][0]: temp})
         else:
-            simularStudent = SqlRequest.make_query(cursor, getUserFromSameFacultyQuery, allUsers[i][1])
-            apps = dictApplications.get(simularStudent[0][0])
-            temp = []
-            for el in apps:
-                temp.append(el-1)
-            recommend.update({allUsers[i][0]: temp})
+            faculty = SqlRequest.make_query(cursor, getUserFacultyQuery, allUsers[i][1])
+            if faculty is not None:
+                simularStudent = SqlRequest.make_query(cursor, getUserFromSameFacultyQuery, allUsers[i][1])
+                if simularStudent is not None:
+                    apps = dictApplications.get(simularStudent[0][0])
+                    temp = []
+                    for el in apps:
+                        temp.append(el-1)
+                    recommend.update({allUsers[i][0]: temp})
 
     for i in range(len(allUsers)):
         if len(recommend[allUsers[i][0]]) == 0:
-            simularStudent = SqlRequest.make_query(cursor, getUserFromSameFacultyQuery, allUsers[i][1])
-            apps = dictApplications.get(simularStudent[0][0])
-            temp = []
-            for el in apps:
-                temp.append(el-1)
-            recommend.update({allUsers[i][0]: temp})
+            faculty = SqlRequest.make_query(cursor, getUserFacultyQuery, allUsers[i][1])
+            if faculty is not None:
+                simularStudent = SqlRequest.make_query(cursor, getUserFromSameFacultyQuery, allUsers[i][1])
+                if simularStudent is not None:
+                    apps = dictApplications.get(simularStudent[0][0])
+                    temp = []
+                    for el in apps:
+                        temp.append(el-1)
+                    recommend.update({allUsers[i][0]: temp})
 
     for key in recommend.keys():
         recommended_projects = list(set(recommend[key]))
         for i in range(len(recommended_projects)):
             query = 'Insert into user_recommendations (user_id, project_id) values (%s, %s);'
             cursor.execute(query, (key, recommended_projects[i]+1))
-    print('e')
+    print('Success')
 
 
 except Exception as err:
-    print("Error: " + str(err))
+    print(err)
 
 finally:
     conn.close()

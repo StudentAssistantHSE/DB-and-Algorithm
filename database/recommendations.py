@@ -6,6 +6,6 @@ CREATE TABLE user_recommendations (
   UNIQUE(user_id, project_id),
   FOREIGN KEY (user_id) REFERENCES users(id) ON UPDATE CASCADE,
   FOREIGN KEY (project_id) REFERENCES projects(id) ON UPDATE CASCADE,
-  PRIMARY KEY (user_id, project_id)
+  PRIMARY KEY (user_id, project_id, generated_date)
 );
  ''';

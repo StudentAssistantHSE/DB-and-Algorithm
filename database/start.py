@@ -8,6 +8,8 @@ from category import categorySql
 from faculty import facultySql
 from project_categories import projectCategoriesSql
 from create_indexes import createIndexes
+import DummyData.facultyFill, DummyData.accountFill, DummyData.projectFill, DummyData.applicationsFill, DummyData.categoryFill,\
+    DummyData.accountInterestsFill, DummyData.projectCategoriesFill
 from user_categories import accountInterestsSql
 from database.recommendations import recommendationSql
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
@@ -23,7 +25,11 @@ try:
     conn.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
     requests = [facultySql, accountSql, statusSql, projectSql, applicationSql, categorySql, accountInterestsSql,
                  projectCategoriesSql, recommendationSql]
-    fill = [statusFill]
+    fill = [DummyData.facultyFill.facultyFill, DummyData.accountFill.accountFill, statusFill,
+            DummyData.projectFill.projectFill,
+            DummyData.applicationsFill.applicationFill, DummyData.categoryFill.categoryFill,
+            DummyData.accountInterestsFill.accountInterestsFill,
+            DummyData.projectCategoriesFill.projectCategoriesFill]
 
     # executing query
     for request in requests:
