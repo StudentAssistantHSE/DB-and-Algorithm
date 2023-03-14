@@ -1,3 +1,5 @@
+import random
+
 import pandas as pd
 import numpy as np
 import psycopg2
@@ -92,26 +94,37 @@ try:
             recommend.update({allUsers[i][0]: temp})
         else:
             faculty = SqlRequest.make_query(cursor, getUserFacultyQuery, allUsers[i][1])
-            if faculty is not None:
+            if len(faculty) != 0:
                 simularStudent = SqlRequest.make_query(cursor, getUserFromSameFacultyQuery, allUsers[i][1])
-                if simularStudent is not None:
+                if len(simularStudent) != 0:
                     apps = dictApplications.get(simularStudent[0][0])
                     temp = []
                     for el in apps:
                         temp.append(el-1)
                     recommend.update({allUsers[i][0]: temp})
+                else:
+                    recommend.update({allUsers[i][0]: [random.randint(0, len(projects) - 1)]})
+            else:
+                recommend.update({allUsers[i][0]: [random.randint(0, len(projects) - 1)]})
 
     for i in range(len(allUsers)):
+        if (i == 999):
+            print(i)
         if len(recommend[allUsers[i][0]]) == 0:
             faculty = SqlRequest.make_query(cursor, getUserFacultyQuery, allUsers[i][1])
-            if faculty is not None:
+            if len(faculty) != 0:
                 simularStudent = SqlRequest.make_query(cursor, getUserFromSameFacultyQuery, allUsers[i][1])
-                if simularStudent is not None:
+                if len(simularStudent) != 0:
                     apps = dictApplications.get(simularStudent[0][0])
                     temp = []
                     for el in apps:
                         temp.append(el-1)
                     recommend.update({allUsers[i][0]: temp})
+                else:
+                    recommend.update({allUsers[i][0]: [random.randint(0, len(projects) - 1)]})
+            else:
+                recommend.update({allUsers[i][0]: [random.randint(0, len(projects) - 1)]})
+
 
     for key in recommend.keys():
         recommended_projects = list(set(recommend[key]))
