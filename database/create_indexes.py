@@ -5,4 +5,6 @@ create index on applications(project_id);
 create index on applications(status);
 create index on user_categories(category_id);
 create index on project_categories(category_id);
+create index on users(faculty_id);
+create index on user_recommendations(project_id);
 '''

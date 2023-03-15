@@ -25,7 +25,7 @@ try:
     tagsUnited = list(set().union(*tags))
     df_tf = pd.DataFrame(np.zeros((len(projects), len(tags))), columns=tagsUnited)
     for i in range(len(projects)+1):
-        getTagsOfCurrentProject = 'Select * from project_categories where project_id = %s'
+        getTagsOfCurrentProject = 'Select project_id, category_id from project_categories where project_id = %s'
         tagsOfProject = SqlRequest.make_query(cursor, getTagsOfCurrentProject, i)
         if len(tagsOfProject) != 0:
             df_tf[tags[tagsOfProject[0][1] - 1][0]][tagsOfProject[0][0]-1] = df_tf[tags[tagsOfProject[0][1] - 1][0]][tagsOfProject[0][0]-1] +\
@@ -108,8 +108,6 @@ try:
                 recommend.update({allUsers[i][0]: [random.randint(0, len(projects) - 1)]})
 
     for i in range(len(allUsers)):
-        if (i == 999):
-            print(i)
         if len(recommend[allUsers[i][0]]) == 0:
             faculty = SqlRequest.make_query(cursor, getUserFacultyQuery, allUsers[i][1])
             if len(faculty) != 0:
