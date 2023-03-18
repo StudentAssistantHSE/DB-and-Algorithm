@@ -3,6 +3,8 @@ import random
 import pandas as pd
 import numpy as np
 import psycopg2
+from controllers import CategoriesController, ProjectCategoriesController, ProjectsController, ApplicationController, \
+    UsersController, UserRecommendationsController
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 from sklearn.metrics.pairwise import cosine_similarity
 
@@ -16,25 +18,29 @@ conn = psycopg2.connect(database=DB_NAME, user=DB_USER, port=DB_PORT, password=D
 try:
     cursor = conn.cursor()
     conn.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
-    getTagsQuery = 'Select category from categories'
-    getProjectTagsQuery = 'Select * from project_categories'
-    getProjectQuery = 'Select ID from projects where is_closed = false'
-    tags = SqlRequest.make_query(cursor, getTagsQuery)
-    projects = SqlRequest.make_query(cursor, getProjectQuery)
-    projectsTags = SqlRequest.make_query(cursor, getProjectTagsQuery)
+
+    categoryController = CategoriesController.CategoryController(cursor)
+    projectCategoriesController = ProjectCategoriesController.ProjectCategoriesController(cursor)
+    projectController = ProjectsController.ProjectController(cursor)
+    applicationsController = ApplicationController.ApplicationController(cursor)
+    usersController = UsersController.UsersController(cursor)
+    userRecommendationController = UserRecommendationsController.UserRecommendationsController(cursor)
+
+    tags = categoryController.get_all_categories()
+    projects = projectController.get_id_non_closed()
+    projectsTags = projectCategoriesController.get_all()
     tagsUnited = list(set().union(*tags))
+
     df_tf = pd.DataFrame(np.zeros((len(projects), len(tags))), columns=tagsUnited)
     for i in range(len(projects)+1):
-        getTagsOfCurrentProject = 'Select project_id, category_id from project_categories where project_id = %s'
-        tagsOfProject = SqlRequest.make_query(cursor, getTagsOfCurrentProject, i)
+        tagsOfProject = projectCategoriesController.get_by_project(i)
         if len(tagsOfProject) != 0:
             df_tf[tags[tagsOfProject[0][1] - 1][0]][tagsOfProject[0][0]-1] = df_tf[tags[tagsOfProject[0][1] - 1][0]][tagsOfProject[0][0]-1] +\
                                                                    (1 / len(tagsOfProject))
 
     idf = {}
     for tag in range(1, len(tags)+1):
-        getProjectsWithTag = 'Select * from project_categories where category_id = %s'
-        projectsWithTag = SqlRequest.make_query(cursor, getProjectsWithTag, tag)
+        projectsWithTag = projectCategoriesController.get_by_category(tag)
         if len(projectsWithTag) != 0:
             idf[tags[tag-1][0]] = np.log10(len(projects)/len(projectsWithTag))
         else:
@@ -49,12 +55,7 @@ try:
     res = pd.DataFrame(cosine_similarity(df_tf_idf))
     indexes = res.apply(AlgorithmOperator.get_top_indexes, axis=1) # Проекты со схожими тегами, без прибавки единицы
 
-    getUsersApplicationsQuery = 'SELECT applications.applicant_id, applications.project_id ' \
-                                'FROM applications ' \
-                                'INNER JOIN projects ' \
-                                'ON applications.project_id = projects.id ' \
-                                'WHERE projects.is_closed = false;'
-    usersApplications = SqlRequest.make_query(cursor, getUsersApplicationsQuery)
+    usersApplications = applicationsController.get_users_applications()
     dictApplications = {}
 
     # group the tuples by their first element
@@ -67,23 +68,7 @@ try:
     # join the tuples with the same first element
     applicationsByUsers = [(key, tuple(val)) for key, val in dictApplications.items()]
 
-    getAllUsersQuery = 'SELECT users.id, users.faculty_id ' \
-                       'FROM users'
-
-    getUserFromSameFacultyQuery = 'SELECT u.id ' \
-                                  'FROM users u ' \
-                                  'INNER JOIN applications a ' \
-                                  'ON u.id = a.applicant_id ' \
-                                  'INNER JOIN project_categories pc ' \
-                                  'ON a.project_id = pc.project_id ' \
-                                  'WHERE u.faculty_id = %s ' \
-                                  'ORDER BY RANDOM() ' \
-                                  'LIMIT 1;'
-
-    getUserFacultyQuery = 'Select Faculty_id from users where id = %s'
-
-
-    allUsers = SqlRequest.make_query(cursor, getAllUsersQuery)
+    allUsers = usersController.get_all_id_and_faculty()
     recommend = {}
     for i in range(len(allUsers)):
         if allUsers[i][0] in dictApplications:
@@ -93,9 +78,9 @@ try:
                 temp.extend(indexes[el - 1])
             recommend.update({allUsers[i][0]: temp})
         else:
-            faculty = SqlRequest.make_query(cursor, getUserFacultyQuery, allUsers[i][1])
+            faculty = usersController.get_user_faculty(allUsers[i][1])
             if len(faculty) != 0:
-                simularStudent = SqlRequest.make_query(cursor, getUserFromSameFacultyQuery, allUsers[i][1])
+                simularStudent = usersController.get_user_from_same_faculty(allUsers[i][1])
                 if len(simularStudent) != 0:
                     apps = dictApplications.get(simularStudent[0][0])
                     temp = []
@@ -109,9 +94,9 @@ try:
 
     for i in range(len(allUsers)):
         if len(recommend[allUsers[i][0]]) == 0:
-            faculty = SqlRequest.make_query(cursor, getUserFacultyQuery, allUsers[i][1])
+            faculty = usersController.get_user_faculty(allUsers[i][1])
             if len(faculty) != 0:
-                simularStudent = SqlRequest.make_query(cursor, getUserFromSameFacultyQuery, allUsers[i][1])
+                simularStudent = usersController.get_user_from_same_faculty(allUsers[i][1])
                 if len(simularStudent) != 0:
                     apps = dictApplications.get(simularStudent[0][0])
                     temp = []
@@ -127,8 +112,7 @@ try:
     for key in recommend.keys():
         recommended_projects = list(set(recommend[key]))
         for i in range(len(recommended_projects)):
-            query = 'Insert into user_recommendations (user_id, project_id) values (%s, %s);'
-            cursor.execute(query, (key, recommended_projects[i]+1))
+            userRecommendationController.insert_recommendations(key, recommended_projects[i] + 1)
     print('Success')
 
 
