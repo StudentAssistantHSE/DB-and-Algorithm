@@ -1,0 +1,12 @@
+ {
+  "apps": [
+    {
+      "name": "settings",
+      "cwd": "/srv/settings",
+      "args": "runserver localhost:1234",
+      "script": "manage.py",
+      "exec_mode": "fork",
+      "exec_interpreter": "python"
+    }
+  ]
+}
