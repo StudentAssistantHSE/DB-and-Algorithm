@@ -1,12 +1,14 @@
- {
-  "apps": [
-    {
-      "name": "settings",
-      "cwd": "/srv/settings",
-      "args": "runserver localhost:1234",
-      "script": "manage.py",
-      "exec_mode": "fork",
-      "exec_interpreter": "python"
-    }
-  ]
-}
+{       
+   "apps":
+      [{
+        "name": "djnago_with_pm2",
+        "script": "manage.py",
+        "args": ["runserver", "127.0.0.1:1234"],
+        "exec_mode": "fork",
+        "instances": "1",
+        "wait_ready": true,
+        "autorestart": false,
+        "max_restarts": 5,
+        "interpreter" : "python"
+      }] 
+}    
