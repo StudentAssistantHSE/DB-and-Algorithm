@@ -230,7 +230,7 @@ class Statuses(models.Model):
         db_table = 'statuses'
 
     def __str__(self):
-        return self.status.name
+        return self.status
 
 
 class UserCategories(models.Model):
