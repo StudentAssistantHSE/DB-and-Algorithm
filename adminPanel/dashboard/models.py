@@ -16,9 +16,14 @@ class Applications(models.Model):
     status = models.ForeignKey('Statuses', models.DO_NOTHING, db_column='status', blank=True, null=True)
 
     class Meta:
+        verbose_name = 'Заявка'
+        verbose_name_plural = 'Заявки'
         managed = False
         db_table = 'applications'
         unique_together = (('id', 'project', 'applicant'),)
+
+    def __str__(self):
+        return self.project.name
 
 
 class AuthGroup(models.Model):
@@ -180,6 +185,9 @@ class Projects(models.Model):
         managed = False
         db_table = 'projects'
 
+    def __str__(self):
+        return self.name
+
 
 class ProjectsTimetable(models.Model):
     project = models.ForeignKey(Projects, models.DO_NOTHING, blank=True, null=True)
@@ -233,3 +241,6 @@ class Users(models.Model):
     class Meta:
         managed = False
         db_table = 'users'
+
+    def __str__(self):
+        return self.fullname
