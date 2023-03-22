@@ -100,8 +100,13 @@ class Categories(models.Model):
     is_custom = models.BooleanField(blank=True, null=True)
 
     class Meta:
+        verbose_name = 'Тег'
+        verbose_name_plural = 'Теги'
         managed = False
         db_table = 'categories'
+
+    def __str__(self):
+        return self.category
 
 
 class DjangoAdminLog(models.Model):
@@ -159,15 +164,9 @@ class Faculties(models.Model):
         managed = False
         db_table = 'faculties'
 
+    def __str__(self):
+        return self.name
 
-class ProjectCategories(models.Model):
-    project = models.ForeignKey('Projects', models.DO_NOTHING)
-    category = models.ForeignKey(Categories, models.DO_NOTHING)
-
-    class Meta:
-        managed = False
-        db_table = 'project_categories'
-        unique_together = (('project', 'category'),)
 
 
 class Projects(models.Model):
@@ -182,11 +181,27 @@ class Projects(models.Model):
     is_closed = models.BooleanField(blank=True, null=True)
 
     class Meta:
+        verbose_name = 'Проект'
+        verbose_name_plural = 'Проекты'
         managed = False
         db_table = 'projects'
 
     def __str__(self):
         return self.name
+
+class ProjectCategories(models.Model):
+    project = models.ForeignKey('Projects', models.DO_NOTHING)
+    category = models.ForeignKey(Categories, models.DO_NOTHING)
+
+    class Meta:
+        verbose_name = 'Теги проекта'
+        verbose_name_plural = 'Теги проектов'
+        managed = False
+        db_table = 'project_categories'
+        unique_together = (('project', 'category'),)
+
+    def __str__(self):
+        return self.project.name
 
 
 class ProjectsTimetable(models.Model):
@@ -196,16 +211,26 @@ class ProjectsTimetable(models.Model):
     description = models.TextField(blank=True, null=True)
 
     class Meta:
+        verbose_name = 'Дедлайн'
+        verbose_name_plural = 'Дедлайны'
         managed = False
         db_table = 'projects_timetable'
+
+    def __str__(self):
+        return str(self.project.name + " " + self.name.name)
 
 
 class Statuses(models.Model):
     status = models.TextField(unique=True)
 
     class Meta:
+        verbose_name = 'Статус'
+        verbose_name_plural = 'Статусы'
         managed = False
         db_table = 'statuses'
+
+    def __str__(self):
+        return self.status.name
 
 
 class UserCategories(models.Model):
@@ -213,9 +238,14 @@ class UserCategories(models.Model):
     category = models.ForeignKey(Categories, models.DO_NOTHING)
 
     class Meta:
+        verbose_name = 'Теги пользователя'
+        verbose_name_plural = 'Теги пользователей'
         managed = False
         db_table = 'user_categories'
         unique_together = (('user', 'category'),)
+
+    def __str__(self):
+        return str(self.user.name + " " + self.category)
 
 
 class UserRecommendations(models.Model):
@@ -224,6 +254,8 @@ class UserRecommendations(models.Model):
     generated_date = models.DateField(blank=True, null=True)
 
     class Meta:
+        verbose_name = 'Рекомендации пользователю'
+        verbose_name_plural = 'Рекомендации пользователям'
         managed = False
         db_table = 'user_recommendations'
 
@@ -233,12 +265,15 @@ class Users(models.Model):
     fullname = models.TextField()
     last_login = models.DateField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
+    bio = models.TextField(blank=True, null=True)
     faculty = models.ForeignKey(Faculties, models.DO_NOTHING, blank=True, null=True)
     password = models.TextField()
     created_date = models.DateField()
     updated_date = models.DateField(blank=True, null=True)
 
     class Meta:
+        verbose_name = 'Пользователь'
+        verbose_name_plural = 'Пользователи'
         managed = False
         db_table = 'users'
 

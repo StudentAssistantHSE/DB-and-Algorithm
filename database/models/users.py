@@ -26,6 +26,7 @@ class User:
             FULLNAME text NOT NULL,
             LAST_LOGIN DATE,
             DESCRIPTION TEXT,
+            BIO TEXT,
             FACULTY_ID BIGINT REFERENCES FACULTIES,
             PASSWORD text NOT NULL,
             CREATED_DATE DATE NOT NULL DEFAULT CURRENT_DATE,
