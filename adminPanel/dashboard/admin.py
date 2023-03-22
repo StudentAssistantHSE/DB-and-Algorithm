@@ -11,7 +11,7 @@ class StatusesAdmin(admin.ModelAdmin):
     getStatus.short_description = 'Status name'
 
 class FacultyAdmin(admin.ModelAdmin):
-    list_display = ["name", "shortname"]
+    list_display = ["id", "name", "shortname"]
 
     def getFaculty(self, obj):
         return obj.faculty.name
