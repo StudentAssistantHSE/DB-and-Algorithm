@@ -1,5 +1,5 @@
 import psycopg2
-from database.models.user_recommendations import UserRecommendation
+from models.user_recommendations import UserRecommendation
 
 
 class UserRecommendationsController:

@@ -1,5 +1,5 @@
 import psycopg2
-from database.models.faculties import Faculty
+from models.faculties import Faculty
 
 
 class FacultyController:

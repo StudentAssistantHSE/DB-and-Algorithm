@@ -1,5 +1,5 @@
 import psycopg2
-from database.models.project_categories import ProjectCategory
+from models.project_categories import ProjectCategory
 
 
 class ProjectCategoriesController:

@@ -1,5 +1,5 @@
 import psycopg2
-from database.models.user_categories import UserCategory
+from models.user_categories import UserCategory
 
 
 class UserCategoriesController:

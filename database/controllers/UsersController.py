@@ -1,5 +1,5 @@
 import psycopg2
-from database.models.users import User
+from models.users import User
 
 
 class UsersController:

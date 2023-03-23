@@ -1,5 +1,5 @@
 import psycopg2
-from database.models.projects_timetable import ProjectTimetable
+from models.projects_timetable import ProjectTimetable
 
 
 class ProjectTimetableController:

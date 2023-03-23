@@ -1,5 +1,5 @@
 import psycopg2
-from database.models.statuses import Status
+from models.statuses import Status
 
 
 class StatusesController:

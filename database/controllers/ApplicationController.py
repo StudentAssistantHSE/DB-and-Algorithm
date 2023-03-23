@@ -1,5 +1,5 @@
 import psycopg2
-from database.models.applications import Application
+from models.applications import Application
 
 class ApplicationController:
     def __init__(self, cursor):
