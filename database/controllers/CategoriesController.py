@@ -1,5 +1,5 @@
 import psycopg2
-from database.models.categories import Category
+from models.categories import Category
 
 class CategoryController:
     def __init__(self, cursor):
