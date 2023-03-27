@@ -24,11 +24,20 @@ class Project:
             DESCRIPTION text NOT NULL,
             CONTACTS text,
             CREATED_DATE DATE NOT NULL DEFAULT CURRENT_DATE,
+            APPLICATION_DEADLINE DATE,
             UPDATED_DATE DATE,
             START_DATE DATE,
             END_DATE DATE,
             CREATOR_USER_ID BIGINT REFERENCES users,
-            IS_CLOSED BOOLEAN)''')
+            IS_CLOSED BOOLEAN,
+            EMPLOYMENT_TYPE BIGINT,
+            TERRITORY text,
+            SKILLS text,
+            CREDIT_NUMBER BIGINT,
+            CAMPUS BIGINT,
+            PARTICIPANTS_NUMBER BIGINT,
+            PROJECT_TYPE BIGINT,
+            WEEKLY_HOURS BIGINT)''')
 
     @staticmethod
     def create(cursor, name, description, contacts, start_date=None, end_date=None, creator_user_id=None):

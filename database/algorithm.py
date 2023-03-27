@@ -31,9 +31,9 @@ try:
     projectsTags = projectCategoriesController.get_all()
     tagsUnited = list(set().union(*tags))
 
-    df_tf = pd.DataFrame(np.zeros((len(projects), len(tags))), columns=tagsUnited)
-    for i in range(len(projects)+1):
-        tagsOfProject = projectCategoriesController.get_by_project(i)
+    df_tf = pd.DataFrame(np.zeros(((projects[-1][0]), len(tags))), columns=tagsUnited)
+    for el in projects:
+        tagsOfProject = projectCategoriesController.get_by_project(el[0])
         if len(tagsOfProject) != 0:
             df_tf[tags[tagsOfProject[0][1] - 1][0]][tagsOfProject[0][0]-1] = df_tf[tags[tagsOfProject[0][1] - 1][0]][tagsOfProject[0][0]-1] +\
                                                                    (1 / len(tagsOfProject))
@@ -49,7 +49,7 @@ try:
     df_tf_idf = df_tf.copy()
 
     for tag in tags:
-        for i in range(len(projects)):
+        for i in range(projects[-1][0]):
             df_tf_idf[tag[0]][i] = df_tf[tag[0]][i] * idf[tag[0]]
 
     res = pd.DataFrame(cosine_similarity(df_tf_idf))

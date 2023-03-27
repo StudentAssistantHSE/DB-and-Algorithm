@@ -75,6 +75,7 @@ class User:
                        'ON u.id = a.applicant_id ' \
                        'INNER JOIN project_categories pc ' \
                        'ON a.project_id = pc.project_id ' \
+                       'INNER JOIN projects p ON pc.project_id = p.id AND p.is_closed = false ' \
                        'WHERE u.faculty_id = %s ' \
                        'ORDER BY RANDOM() ' \
                        'LIMIT 1;', (faculty_id,))
