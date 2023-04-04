@@ -1,0 +1,418 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html dir="ltr" lang="en-us">
+<head>
+    <title>Отправка уведомлений</title>
+    <link href="{% static 'admin/css/base.css' %}" rel="stylesheet">
+
+    <link href="{% static 'admin/css/dark_mode.css' %}" rel="stylesheet">
+
+
+    <link href="{% static 'admin/css/nav_sidebar.css' %}" rel="stylesheet">
+    <script defer src="{% static 'admin/js/nav_sidebar.js' %}"></script>
+
+
+    <link href="{% static 'admin/css/forms.css' %}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/pop_up.css' %}">
+
+
+    <script src="/admin/jsi18n/"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+    <script src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
+    <script src="{% static 'admin/js/jquery.init.js' %}"></script>
+    <script src="{% static 'admin/js/core.js' %}"></script>
+    <script src="{% static 'admin/js/admin/RelatedObjectLookups.js' %}"></script>
+    <script src="{% static 'admin/js/actions.js' %}"></script>
+    <script src="{% static 'admin/js/urlify.js' %}"></script>
+    <script src="{% static 'admin/js/prepopulate.js' %}"></script>
+    <script src="{% static 'admin/js/vendor/xregexp/xregexp.js' %}"></script>
+    <script defer src="{% static 'admin/js/filters.js' %}"></script>
+
+
+    <meta content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport">
+    <link href="{% static 'admin/css/responsive.css' %}" rel="stylesheet">
+
+
+    <meta content="NONE,NOARCHIVE" name="robots">
+</head>
+
+<body class=" app-dashboard model-projectstimetable change-form"
+      data-admin-utc-offset="0">
+
+<!-- Container -->
+<div id="container">
+
+
+    <!-- Header -->
+
+    <div id="header">
+        <div id="branding">
+
+            <h1 id="site-name"><a href="/admin/">Django administration</a></h1>
+
+        </div>
+
+
+        <div id="user-tools">
+
+            Welcome,
+            <strong>admin</strong>.
+
+
+            <a href="/">View site</a> /
+
+
+            <a href="/admin/password_change/">Change password</a> /
+
+            <form action="/admin/logout/" id="logout-form" method="post">
+                <input name="csrfmiddlewaretoken" type="hidden"
+                       value="0cysC0E7vqrhMmp5k6ViecOmZnfbTH9qVMvKMNkWNczQf0wHVGag2k9IKrFQ4268">
+                <button type="submit">Log out</button>
+            </form>
+
+        </div>
+
+
+    </div>
+
+    <!-- END Header -->
+
+    <div class="breadcrumbs">
+        <a href="/admin/">Home</a>
+        &rsaquo; <a href="/admin/dashboard/">Dashboard</a>
+        &rsaquo; Заявки
+    </div>
+
+
+    <div class="main" id="main">
+
+
+        <button aria-label="Toggle navigation" class="sticky toggle-nav-sidebar" id="toggle-nav-sidebar"></button>
+        <nav class="sticky" id="nav-sidebar">
+            <input aria-label="Filter navigation items" id="nav-filter"
+                   placeholder="Start typing to filter…"
+                   type="search">
+
+
+            <div class="app-auth module">
+                <table>
+                    <caption>
+                        <a class="section" href="/admin/auth/"
+                           title="Models in the Authentication and Authorization application">Authentication and
+                            Authorization</a>
+                    </caption>
+
+                    <tr class="model-group">
+
+                        <th scope="row"><a href="/admin/auth/group/">Groups</a></th>
+
+
+                        <td><a class="addlink" href="/admin/auth/group/add/">Add</a></td>
+
+
+                    </tr>
+
+                    <tr class="model-user">
+
+                        <th scope="row"><a href="/admin/auth/user/">Users</a></th>
+
+
+                        <td><a class="addlink" href="/admin/auth/user/add/">Add</a></td>
+
+
+                    </tr>
+
+                </table>
+            </div>
+
+            <div class="app-dashboard module current-app">
+                <table>
+                    <caption>
+                        <a class="section" href="/admin/dashboard/" title="Models in the Dashboard application">Dashboard</a>
+                    </caption>
+
+                    <tr class="model-projectstimetable">
+
+                        <th scope="row"><a href="/admin/dashboard/projectstimetable/">Дедлайны</a></th>
+
+
+                        <td><a class="addlink" href="/admin/dashboard/projectstimetable/add/">Add</a></td>
+
+
+                    </tr>
+
+                    <tr class="model-applications current-model">
+
+                        <th scope="row"><a aria-current="page" href="/admin/dashboard/applications/">Заявки</a></th>
+
+
+                        <td><a class="addlink" href="/admin/dashboard/applications/add/">Add</a></td>
+
+
+                    </tr>
+
+                    <tr class="model-users">
+
+                        <th scope="row"><a href="/admin/dashboard/users/">Пользователи</a></th>
+
+
+                        <td><a class="addlink" href="/admin/dashboard/users/add/">Add</a></td>
+
+
+                    </tr>
+
+                    <tr class="model-projects">
+
+                        <th scope="row"><a href="/admin/dashboard/projects/">Проекты</a></th>
+
+
+                        <td><a class="addlink" href="/admin/dashboard/projects/add/">Add</a></td>
+
+
+                    </tr>
+
+                    <tr class="model-userrecommendations">
+
+                        <th scope="row"><a href="/admin/dashboard/userrecommendations/">Рекомендации пользователям</a>
+                        </th>
+
+
+                        <td><a class="addlink" href="/admin/dashboard/userrecommendations/add/">Add</a></td>
+
+
+                    </tr>
+
+                    <tr class="model-statuses">
+
+                        <th scope="row"><a href="/admin/dashboard/statuses/">Статусы</a></th>
+
+
+                        <td><a class="addlink" href="/admin/dashboard/statuses/add/">Add</a></td>
+
+
+                    </tr>
+
+                    <tr class="model-categories">
+
+                        <th scope="row"><a href="/admin/dashboard/categories/">Теги</a></th>
+
+
+                        <td><a class="addlink" href="/admin/dashboard/categories/add/">Add</a></td>
+
+
+                    </tr>
+
+                    <tr class="model-usercategories">
+
+                        <th scope="row"><a href="/admin/dashboard/usercategories/">Теги пользователей</a></th>
+
+
+                        <td><a class="addlink" href="/admin/dashboard/usercategories/add/">Add</a></td>
+
+
+                    </tr>
+
+                    <tr class="model-projectcategories">
+
+                        <th scope="row"><a href="/admin/dashboard/projectcategories/">Теги проектов</a></th>
+
+
+                        <td><a class="addlink" href="/admin/dashboard/projectcategories/add/">Add</a></td>
+
+
+                    </tr>
+
+                    <tr class="model-faculties">
+
+                        <th scope="row"><a href="/admin/dashboard/faculties/">Факультеты</a></th>
+
+
+                        <td><a class="addlink" href="/admin/dashboard/faculties/add/">Add</a></td>
+
+
+                    </tr>
+
+                </table>
+            </div>
+
+
+        </nav>
+
+        <div class="content">
+
+
+            <!-- Content -->
+            <form action="" class="contact-form" method="POST" id="my-form">
+                {% csrf_token %}
+                <fieldset class="module aligned ">
+                    <div class="form-row field-topic">
+                        <label>
+                            <input checked class="radio" name="dropdownType" type="radio" value="dropdown1">Dropdown 1
+                        </label>
+                        <label>
+                            <input class="radio" name="dropdownType" type="radio" value="dropdown2">Dropdown 2
+                        </label>
+                    </div>
+                    <div id="dropdownContainer">
+                        <select class="select2" id="dropdown1" multiple name="dropdown1">
+                            {% for option in emails %}
+                            <option value="{{ option.id }}">{{ option.email }}</option>
+                            {% endfor %}
+                        </select>
+
+                        <select id="dropdown2" name="dropdown2" style="display: none;">
+                            {% for option in faculties %}
+                            <option value="{{ option.id }}">{{ option.name }}</option>
+                            {% endfor %}
+                        </select>
+                        <button class="btn sumbit-btn" id="selectValueButton" type="button">Select Value</button>
+                    </div>
+                    <div class="form-row field-topic">
+                        <div>
+                            <label class="required" for="id_email">Email:</label>
+                            <textarea class="vLargeTextField" cols="40" id="id_email" name="email" required
+                                      rows="10"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-row field-topic">
+                        <div>
+                            <label class="required" for="id_topic">Topic:</label>
+                            <textarea class="vLargeTextField" cols="40" id="id_topic" name="topic" required
+                                      rows="10"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-row field-topic">
+                        <div>
+                            <label class="required" for="id_message">Message:</label>
+                            <textarea class="vLargeTextField" cols="40" id="id_message" name="text" required
+                                      rows="10"></textarea>
+                        </div>
+                    </div>
+                    <div class="submit-row">
+                        <input class="btn sumbit-btn" type="Submit" value="Send Message" id="Send">
+                    </div>
+                    <div id="my-message"></div>
+                </fieldset>
+            </form>
+        </div>
+        <!-- END Content -->
+        <div id="footer"></div>
+    </div>
+</div>
+</div>
+<!-- END Container -->
+<script type="text/javascript">
+    $(document).ready(function() {
+      $('.select2').select2({
+        minimumResultsForSearch: Infinity,
+        placeholder: "Select an option or type to search",
+        allowClear: true,
+        tags: true,
+        tokenSeparators: [',', ' ']
+      });
+    });
+
+
+
+</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    // get the radio buttons and dropdowns
+    var radioButtons = $('input[name="dropdownType"]');
+    var dropdown1 = $('#dropdown1');
+    var dropdown2 = $('#dropdown2');
+
+    // add change event listener to the radio buttons
+    radioButtons.change(function() {
+      if (this.value === 'dropdown1') {
+        dropdown1.show();
+        dropdown2.hide();
+      } else if (this.value === 'dropdown2') {
+        dropdown1.hide();
+        dropdown2.show();
+      }
+    });
+  });
+
+
+</script>
+<script>
+  $(document).ready(function() {
+    // get the dropdowns and email field
+    var dropdown1 = $('#dropdown1');
+    var dropdown2 = $('#dropdown2');
+    var emailField = $('#id_email');
+
+    // add click event listener to the button
+    $('#selectValueButton').click(function() {
+      var selectedOptions = [];
+
+      if (dropdown1.is(':visible')) {
+        dropdown1.find('option:selected').each(function() {
+          selectedOptions.push($(this).text());
+        });
+      } else if (dropdown2.is(':visible')) {
+        dropdown2.find('option:selected').each(function() {
+          selectedOptions.push($(this).text());
+        });
+      }
+
+if (selectedOptions.length > 0) {
+      // get existing email text and split into lines
+      var emailText = emailField.val();
+      var lines = emailText.trim().split('\n');
+
+      // check if selected options already exist in email field
+      var lastLine = lines[lines.length - 1];
+      var existingOptions = lastLine.split('; ');
+      var newOptions = selectedOptions.filter(function(option) {
+        return existingOptions.indexOf(option) === -1;
+      });
+
+      if (newOptions.length > 0) {
+        // add new selected options to last line
+        var separator = lastLine.length > 0 ? '; ' : '';
+        lines[lines.length - 1] = lastLine + separator + newOptions.join('; ');
+
+        // set modified text to email field
+        emailField.val(lines.join('\n'));
+      }
+    }
+    });
+  });
+
+</script>
+
+<script>
+  $('#Send').on('click', function(event) {
+  event.preventDefault(); // prevent default form submission behavior
+  $.ajax({
+    url: 'send_email',
+    method: 'POST',
+    data: $('#my-form').serialize(),
+    success: function(response) {
+      $('#my-message').text('Message sent successfully!');
+      $('#my-message').addClass('success');
+      setTimeout(function() {
+        $('#my-message').removeClass('success');
+        $('#my-message').text('');
+      }, 5000);
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      $('#my-message').text('Message failed to send.');
+      $('#my-message').addClass('error');
+            setTimeout(function() {
+        $('#my-message').removeClass('error');
+        $('#my-message').text('');
+      }, 5000);
+    }
+  });
+});
+</script>
+
+</body>
+</html>

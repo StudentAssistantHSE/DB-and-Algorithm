@@ -1,0 +1,16 @@
+#my-message {
+  display: none;
+  padding: 10px;
+}
+
+#my-message.success {
+  display: block;
+  background-color: green;
+  color: white;
+}
+
+#my-message.error {
+  display: block;
+  background-color: red;
+  color: white;
+}

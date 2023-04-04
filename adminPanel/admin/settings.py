@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'adminPanel.dashboard.apps.DashboardConfig',
+    'adminPanel.dashboard.templates'
 ]
 
 MIDDLEWARE = [
@@ -130,3 +131,12 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticAdmin')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CSRF_TRUSTED_ORIGINS = ['http://84.201.175.11', 'https://84.201.175.11']
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_HOST_USER = 'gabaranov@edu.hse.ru'
+DEFAULT_FROM_EMAIL = 'gabaranov@edu.hse.ru'
+EMAIL_HOST_PASSWORD = 'zcdtcddqevwlldce'
+EMAIL_PORT = 465
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
