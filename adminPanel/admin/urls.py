@@ -19,9 +19,10 @@ from django.conf import settings
 from django.conf.urls.static import static
 from adminPanel.dashboard import views
 
+
 urlpatterns = [
-    path('admin/email', views.email),
+    path('admin/email', views.email, name='email'),
     path('admin/send_email', views.send_mails),
     path('admin/', admin.site.urls),
-    ##path('', views.index)
+    path('', views.index)
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

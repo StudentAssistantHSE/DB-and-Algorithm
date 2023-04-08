@@ -1,0 +1,18 @@
+{% extends "admin/base_site.html" %}
+{% load i18n %}
+
+{% block title %}{{ title }} | {{ site_title|default:_('NEW TITLE') }}{% endblock %}
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">Student Assistant</a></h1>
+{% endblock %}
+
+{% block nav-sidebar %}
+{% include 'admin/nav_sidebar.html' %}
+
+{% endblock %}
+
+{% block content %}
+<!-- Your content goes here -->
+{% endblock %}
+

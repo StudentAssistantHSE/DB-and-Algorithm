@@ -14,6 +14,18 @@
 {% block content %}
 <div id="content-main">
   {% include "admin/app_list.html" with app_list=app_list show_changelinks=True %}
+    <div class="app-auth module">
+        <table>
+            <caption><a class="section"
+                        title="Additionally">Дополнительно</a>
+            </caption>
+            <tr class="model-group">
+                <th scope="row"><a href="/admin/email">Отправить сообщение</a></th>
+                <td><a class="addlink"></a></td>
+                <td><a class="changelink"></a></td>
+            </tr>
+        </table>
+    </div>
 </div>
 {% endblock %}
 

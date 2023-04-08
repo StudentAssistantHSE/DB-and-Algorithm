@@ -1,3 +1,4 @@
+
 {% load static %}
 
 <!DOCTYPE html>
@@ -52,7 +53,7 @@
     <div id="header">
         <div id="branding">
 
-            <h1 id="site-name"><a href="/admin/">Django administration</a></h1>
+            <h1 id="site-name"><a href="/admin/">Student Assistant</a></h1>
 
         </div>
 
@@ -84,12 +85,11 @@
     <div class="breadcrumbs">
         <a href="/admin/">Home</a>
         &rsaquo; <a href="/admin/dashboard/">Dashboard</a>
-        &rsaquo; Заявки
+        &rsaquo; Дополнительно
     </div>
 
 
     <div class="main" id="main">
-
 
         <button aria-label="Toggle navigation" class="sticky toggle-nav-sidebar" id="toggle-nav-sidebar"></button>
         <nav class="sticky" id="nav-sidebar">
@@ -236,12 +236,24 @@
 
                     </tr>
 
-                </table>
-            </div>
 
+                </table>
+
+            </div>
+<div class="app-auth module">
+        <table>
+            <caption><a class="section" href="/admin/auth/"
+                        title="Additionally">Дополнительно</a>
+            </caption>
+            <tbody>
+            <tr class="module-group">
+                <th scope="row"><a href="/admin/email">Отправить сообщение</a></th>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
         </nav>
-
         <div class="content">
 
 
@@ -251,10 +263,10 @@
                 <fieldset class="module aligned ">
                     <div class="form-row field-topic">
                         <label>
-                            <input checked class="radio" name="dropdownType" type="radio" value="dropdown1">Dropdown 1
+                            <input checked class="radio" name="dropdownType" type="radio" value="dropdown1">Пользователи
                         </label>
                         <label>
-                            <input class="radio" name="dropdownType" type="radio" value="dropdown2">Dropdown 2
+                            <input class="radio" name="dropdownType" type="radio" value="dropdown2">Факультеты
                         </label>
                     </div>
                     <div id="dropdownContainer">

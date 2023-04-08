@@ -1,0 +1,11 @@
+{% extends "admin/base_site.html" %}
+
+{% block sidebar %}
+    <div class="app-dashboard module current-app">
+        <h2>Custom Options</h2>
+        <ul>
+            {% include "admin/custom_sidebar.html" %}
+        </ul>
+    </div>
+    {{ block.super }}
+{% endblock %}
