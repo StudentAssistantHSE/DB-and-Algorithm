@@ -134,9 +134,9 @@ CSRF_TRUSTED_ORIGINS = ['http://84.201.175.11', 'https://84.201.175.11']
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.yandex.ru'
-EMAIL_HOST_USER = 'gabaranov@edu.hse.ru'
-DEFAULT_FROM_EMAIL = 'gabaranov@edu.hse.ru'
-EMAIL_HOST_PASSWORD = 'zcdtcddqevwlldce'
+EMAIL_HOST_USER = 'StudentAssistantHSE@yandex.ru'
+DEFAULT_FROM_EMAIL = 'StudentAssistantHSE@yandex.ru'
+EMAIL_HOST_PASSWORD = 'aupucxnpbeuympbk'
 EMAIL_PORT = 465
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
