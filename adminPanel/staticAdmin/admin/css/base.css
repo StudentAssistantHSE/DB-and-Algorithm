@@ -6,56 +6,67 @@
 
 /* VARIABLE DEFINITIONS */
 :root {
-  --primary: #79aec8;
-  --secondary: #417690;
-  --accent: #f5dd5d;
-  --primary-fg: #fff;
-
-  --body-fg: #333;
-  --body-bg: #fff;
-  --body-quiet-color: #666;
-  --body-loud-color: #000;
-
-  --header-color: #ffc;
-  --header-branding-color: var(--accent);
-  --header-bg: var(--secondary);
-  --header-link-color: var(--primary-fg);
-
-  --breadcrumbs-fg: #c4dce8;
-  --breadcrumbs-link-fg: var(--body-bg);
-  --breadcrumbs-bg: var(--primary);
-
-  --link-fg: #447e9b;
-  --link-hover-color: #036;
-  --link-selected-fg: #5b80b2;
-
-  --hairline-color: #e8e8e8;
-  --border-color: #ccc;
-
-  --error-fg: #ba2121;
-
-  --message-success-bg: #dfd;
-  --message-warning-bg: #ffc;
-  --message-error-bg: #ffefef;
-
-  --darkened-bg: #f8f8f8; /* A bit darker than --body-bg */
-  --selected-bg: #e4e4e4; /* E.g. selected table cells */
-  --selected-row: #ffc;
-
-  --button-fg: #fff;
-  --button-bg: var(--primary);
-  --button-hover-bg: #609ab6;
-  --default-button-bg: var(--secondary);
-  --default-button-hover-bg: #205067;
-  --close-button-bg: #888; /* Previously #bbb, contrast 1.92 */
-  --close-button-hover-bg: #747474;
-  --delete-button-bg: #ba2121;
-  --delete-button-hover-bg: #a41515;
-
-  --object-tools-fg: var(--button-fg);
-  --object-tools-bg: var(--close-button-bg);
-  --object-tools-hover-bg: var(--close-button-hover-bg);
-}
+    /* Primary colors */
+    --primary: #1C5E6B;
+    --primary-fg: #fff;
+    --secondary: #2E7D32;
+    --accent: #FFC107;
+    
+    /* Body */
+    --body-bg: #F5F5F5;
+    --body-fg: #333;
+    --body-quiet-color: #666;
+    --body-loud-color: #000;
+    
+    /* Header */
+    --header-bg: var(--secondary);
+    --header-color: #fff;
+    --header-branding-color: var(--accent);
+    --header-link-color: var(--primary-fg);
+    
+    /* Breadcrumbs */
+    --breadcrumbs-bg: var(--primary);
+    --breadcrumbs-fg: #F5F5F5;
+    --breadcrumbs-link-fg: var(--body-bg);
+    
+    /* Links */
+    --link-fg: #1565C0;
+    --link-hover-color: #0D47A1;
+    --link-selected-fg: #1E88E5;
+    
+    /* Borders */
+    --hairline-color: #E0E0E0;
+    --border-color: #BDBDBD;
+    
+    /* Messages */
+    --error-fg: #D32F2F;
+    --message-success-bg: #C8E6C9;
+    --message-warning-bg: #FFF9C4;
+    --message-error-bg: #FFEBEE;
+    
+    /* Selection */
+    --selected-bg: #E0E0E0;
+    --selected-row: #F5F5F5;
+    
+    /* Buttons */
+    --button-fg: #fff;
+    --button-bg: var(--primary);
+    --button-hover-bg: #0D3E4C;
+    --default-button-bg: var(--secondary);
+    --default-button-hover-bg: #205067;
+    --close-button-bg: #757575;
+    --close-button-hover-bg: #424242;
+    --delete-button-bg: #D32F2F;
+    --delete-button-hover-bg: #9A0007;
+    
+    /* Object tools */
+    --object-tools-fg: var(--button-fg);
+    --object-tools-bg: var(--close-button-bg);
+    --object-tools-hover-bg: var(--close-button-hover-bg);
+    
+    /* Other */
+    --darkened-bg: #EEEEEE;
+    }
 
 html, body {
     height: 100%;
