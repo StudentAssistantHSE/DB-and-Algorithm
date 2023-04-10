@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-b^06t^u$1v2t3$etc)dsm_=*z=*9-07(oh3-zi6$nbv#kv*39$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 DATE_FORMAT = 'd-m-Y'
 USE_L10N = False
@@ -133,7 +133,7 @@ else:
 
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
-STATIC_URL = 'staticAdmin/'
+STATIC_URL = '/staticAdmin/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
