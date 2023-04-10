@@ -131,6 +131,8 @@ if DEBUG:
 else:
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticCollection')
 
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+
 STATIC_URL = 'staticAdmin/'
 
 # Default primary key field type
