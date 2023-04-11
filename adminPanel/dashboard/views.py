@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.core.mail import send_mass_mail
 from django.conf import settings
 from django.utils.text import camel_case_to_spaces
+from django.views.decorators.csrf import csrf_exempt
 
 from adminPanel.dashboard.models import Users, Faculties
 
@@ -34,26 +35,32 @@ def email(request):
         test = Users.objects.filter(faculty__name=faculty).values_list('email', flat=True)
         faculties_emails[faculty.name] = test
     context = {'app_list': app_list, 'emails': emails, 'faculties': faculties, 'faculty_email': faculties_emails}
-    return render(request, 'admin/email.html', context)
+    return render(request, 'admin/email1.html', context)
 
 
+@csrf_exempt
 def send_mails(request):
     emails = Users.objects.all()
     faculties = Faculties.objects.all()
     faculties_emails = {}
     for faculty in faculties:
         test = Users.objects.filter(faculty__name=faculty).values_list('email', flat=True)
-        faculties_emails[faculty.name] = test
+        faculties_emails[faculty.name.replace(' ', '')] = test
     context = {'emails': emails, 'faculties': faculties, 'faculty_email': faculties_emails}
     if request.method == 'POST':
-        email_address = request.POST.get('email')
-        emails = email_address.split('; ')
+        email_address = request.POST.get('emails')
+        email_address = email_address.replace(' ', '').replace('\n', '')
+        faculty_address = request.POST.get('faculties')
+        faculty_address = faculty_address.replace(' ', '').replace('\n', '')
+        facs = faculty_address.split(',')
+        emails = email_address.split(',')
         send_to = []
-        for em in emails:
-            if em in faculties_emails:
-                send_to += faculties_emails[em]
-            else:
+        if emails[0] != '':
+            for em in emails:
                 send_to.append(em)
+        if facs[0] != '':
+            for fac in facs:
+                send_to += (faculties_emails[fac])
         topic = request.POST.get('topic')
         text = request.POST.get('text')
         print((send_to))
