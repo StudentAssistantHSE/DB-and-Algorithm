@@ -35,7 +35,7 @@ ALLOWED_HOSTS = ["localhost:1235", "127.0.0.1:1235", "127.0.0.1", "localhost"]
 # Application definition
 
 INSTALLED_APPS = [
-    'jazzmin',
+    #'jazzmin',
     'adminPanel.dashboard.apps.DashboardConfig',
     'adminPanel.dashboard.templates',
     'django.contrib.admin',
