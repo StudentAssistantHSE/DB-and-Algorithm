@@ -1,7 +1,39 @@
 from django.contrib import admin
+from django.http import HttpResponse
+import csv, datetime
+import openpyxl
+
 from .models import Statuses, Faculties, Applications, Categories, \
     ProjectCategories, Projects, ProjectsTimetable, UserCategories, UserRecommendations, Users
-from django.contrib.auth.admin import UserAdmin
+
+
+@admin.action(description="Импортировать в Эксель")
+def export_to_excel(modeladmin, request, queryset):
+    opts = modeladmin.model._meta
+    response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    response['Content-Disposition'] = f'attachment; filename={opts.verbose_name}.xlsx'
+
+    workbook = openpyxl.Workbook()
+    worksheet = workbook.active
+
+    # Write header row
+    fields = [field for field in opts.get_fields() if not field.many_to_many and not field.one_to_many]
+    header_row = [field.verbose_name for field in fields]
+    worksheet.append(header_row)
+
+    # Write data rows
+    for obj in queryset:
+        data_row = []
+        for field in fields:
+            value = getattr(obj, field.name)
+            if isinstance(value, datetime.datetime):
+                value = value.strftime('%d/%m/%Y')
+            data_row.append(value)
+        worksheet.append(data_row)
+
+    workbook.save(response)
+    return response
+
 
 
 class StatusesAdmin(admin.ModelAdmin):
@@ -17,6 +49,7 @@ class StatusesAdmin(admin.ModelAdmin):
 class FacultyAdmin(admin.ModelAdmin):
     list_display = ["id", "name", "shortname"]
     search_fields = ('name', 'shortname')
+    actions = [export_to_excel]
 
     def getFaculty(self, obj):
         return obj.faculty.name
