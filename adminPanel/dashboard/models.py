@@ -8,6 +8,7 @@
 from django.contrib import admin
 from django.db import models
 from django.db.models.base import ModelBase
+from django.contrib.auth.models import AbstractUser, Group, User
 
 
 class Applications(models.Model):
@@ -35,6 +36,20 @@ class AuthGroup(models.Model):
     class Meta:
         managed = False
         db_table = 'auth_group'
+
+class Role(Group):
+    class Meta:
+        proxy = True
+        app_label = 'auth'
+        verbose_name = 'Роль'
+        verbose_name_plural = 'Роли'
+
+class UsersRoles(User):
+    class Meta:
+        proxy = True
+        app_label = 'auth'
+        verbose_name = 'Пользователь'
+        verbose_name_plural = 'Пользователи'
 
 
 class AuthGroupPermissions(models.Model):

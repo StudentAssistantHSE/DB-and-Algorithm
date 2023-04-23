@@ -2,9 +2,11 @@ from django.contrib import admin
 from django.http import HttpResponse
 import csv, datetime
 import openpyxl
+from django.contrib.auth.admin import GroupAdmin, UserAdmin
+from django.contrib.auth.models import Group, User
 
 from .models import Statuses, Faculties, Applications, Categories, \
-    ProjectCategories, Projects, ProjectsTimetable, UserCategories, UserRecommendations, Users
+    ProjectCategories, Projects, ProjectsTimetable, UserCategories, UserRecommendations, Users, Role, UsersRoles
 
 
 @admin.action(description="Импортировать в Эксель")
@@ -39,6 +41,7 @@ def export_to_excel(modeladmin, request, queryset):
 class StatusesAdmin(admin.ModelAdmin):
     list_display = ["status"]
     search_fields = ('status',)
+    actions = [export_to_excel]
 
     def getStatus(self, obj):
         return obj.status.name
@@ -61,6 +64,7 @@ class ApplicationAdmin(admin.ModelAdmin):
     list_display = ["project", "applicant", "created_date", "message", "status"]
     search_fields = ("project__name", "applicant__fullname", "status__status")
     list_filter = ["status"]
+    actions = [export_to_excel]
 
     def getAppliсation(self, obj):
         return obj.project.name
@@ -72,6 +76,7 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ["category", "is_custom"]
     search_fields = ("category", )
     list_filter = ["is_custom"]
+    actions = [export_to_excel]
     def getCategory(self, obj):
         return obj.category.name
 
@@ -81,6 +86,7 @@ class CategoryAdmin(admin.ModelAdmin):
 class ProjectsAdmin(admin.ModelAdmin):
     list_display = ["name", "description"]
     search_fields = ("name", )
+    actions = [export_to_excel]
 
     def getProjects(self, obj):
         return obj.project.name
@@ -90,24 +96,29 @@ class ProjectsAdmin(admin.ModelAdmin):
 class ProjectCategoryAdmin(admin.ModelAdmin):
     list_display = ["project", "category"]
     search_fields = ("project__name", "category__category")
+    actions = [export_to_excel]
 
 class ProjectTimetableAdmin(admin.ModelAdmin):
     list_display = ["project", "deadline", "name", "description"]
     search_fields = ("project__name", "name")
+    actions = [export_to_excel]
 
 class UserCategoryAdmin(admin.ModelAdmin):
     list_display = ["user", "category"]
     search_fields = ("user__fullname", "category__category")
+    actions = [export_to_excel]
 
 class UserRecommendationsAdmin(admin.ModelAdmin):
     list_display = ["user", "project", "generated_date"]
     search_fields = ("user__fullname", "project__name")
     list_filter = ["generated_date"]
+    actions = [export_to_excel]
 
 class UsersAdmin(admin.ModelAdmin):
     list_display = ["email", "fullname", "last_login", "description", "bio", "faculty", "password", "created_date", "updated_date"]
     search_fields = ("email", "fullname", "faculty__name")
     list_filter = ["faculty", "created_date"]
+    actions = [export_to_excel]
 
 
 
@@ -123,3 +134,7 @@ admin.site.register(ProjectsTimetable, ProjectTimetableAdmin)
 admin.site.register(UserCategories, UserCategoryAdmin)
 admin.site.register(UserRecommendations, UserRecommendationsAdmin)
 admin.site.register(Users, UsersAdmin)
+admin.site.unregister(Group)
+admin.site.unregister(User)
+admin.site.register(UsersRoles, UserAdmin)
+admin.site.register(Role, GroupAdmin)
