@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.http import HttpResponse
 import csv, datetime
+from django.db import models
 import openpyxl
 from django.contrib.auth.admin import GroupAdmin, UserAdmin
 from django.contrib.auth.models import Group, User
@@ -20,17 +21,20 @@ def export_to_excel(modeladmin, request, queryset):
 
     # Write header row
     fields = [field for field in opts.get_fields() if not field.many_to_many and not field.one_to_many]
-    header_row = [field.verbose_name for field in fields]
+    header_row = [field.verbose_name for field in fields if hasattr(field, 'verbose_name')]
     worksheet.append(header_row)
 
     # Write data rows
     for obj in queryset:
         data_row = []
         for field in fields:
-            value = getattr(obj, field.name)
-            if isinstance(value, datetime.datetime):
-                value = value.strftime('%d/%m/%Y')
-            data_row.append(value)
+            if hasattr(field, 'verbose_name'):
+                value = getattr(obj, field.name)
+                if isinstance(value, datetime.datetime):
+                    value = value.strftime('%d/%m/%Y')
+                elif isinstance(value, models.Model):
+                    value = str(value)
+                data_row.append(value)
         worksheet.append(data_row)
 
     workbook.save(response)

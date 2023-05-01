@@ -62,8 +62,8 @@ def send_mails(request):
             for fac in facs:
                 send_to += (faculties_emails[fac])
         topic = request.POST.get('topic')
-        text = request.POST.get('text')
-        print((send_to))
+        text = request.POST.get('message')
+        print((text))
         data = {'email': send_to, 'topic': topic, 'text': text}
         try:
             message_tuple = (data['topic'], data['text'], settings.EMAIL_HOST_USER, send_to)

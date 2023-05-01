@@ -195,7 +195,7 @@ class Projects(models.Model):
     updated_date = models.DateField(blank=True, null=True)
     start_date = models.DateField(blank=True, null=True)
     end_date = models.DateField(blank=True, null=True)
-    creator_user = models.ForeignKey('Users', models.DO_NOTHING, blank=True, null=True)
+    creator_user = models.ForeignKey('Users', models.DO_NOTHING, blank=True, null=True, verbose_name="Users")
     is_closed = models.BooleanField(blank=True, null=True)
 
     class Meta:
@@ -252,8 +252,8 @@ class Statuses(models.Model):
 
 
 class UserCategories(models.Model):
-    user = models.OneToOneField('Users', models.DO_NOTHING, primary_key=True)
-    category = models.ForeignKey(Categories, models.DO_NOTHING)
+    user = models.OneToOneField('Users', models.DO_NOTHING, primary_key=True, verbose_name='User')
+    category = models.ForeignKey(Categories, models.DO_NOTHING, verbose_name='Category')
 
     class Meta:
         verbose_name = 'Теги пользователя'
@@ -263,8 +263,7 @@ class UserCategories(models.Model):
         unique_together = (('user', 'category'),)
 
     def __str__(self):
-        return str(self.user.name + " " + self.category)
-
+        return f'{self.user.name} {self.category}'
 
 class UserRecommendations(models.Model):
     user = models.ForeignKey('Users', models.DO_NOTHING)
@@ -279,15 +278,21 @@ class UserRecommendations(models.Model):
 
 
 class Users(models.Model):
-    email = models.TextField(unique=True)
-    fullname = models.TextField()
-    last_login = models.DateField(blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    bio = models.TextField(blank=True, null=True)
-    faculty = models.ForeignKey(Faculties, models.DO_NOTHING, blank=True, null=True)
-    password = models.TextField()
-    created_date = models.DateField()
-    updated_date = models.DateField(blank=True, null=True)
+    email = models.TextField(unique=True, verbose_name='Email')
+    fullname = models.TextField(verbose_name='Full name')
+    last_login = models.DateField(blank=True, null=True, verbose_name='Last login')
+    description = models.TextField(blank=True, null=True, verbose_name='Description')
+    bio = models.TextField(blank=True, null=True, verbose_name='Bio')
+    faculty = models.ForeignKey(
+        Faculties,
+        models.DO_NOTHING,
+        blank=True,
+        null=True,
+        verbose_name='Faculty'
+    )
+    password = models.TextField(verbose_name='Password')
+    created_date = models.DateField(verbose_name='Created date')
+    updated_date = models.DateField(blank=True, null=True, verbose_name='Updated date')
 
     class Meta:
         verbose_name = 'Пользователь'
@@ -297,4 +302,5 @@ class Users(models.Model):
 
     def __str__(self):
         return self.fullname
+
 
