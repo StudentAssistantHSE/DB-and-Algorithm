@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 import os
 from pathlib import Path
 from adminPanel.admin.jazzmin import JAZZMIN_SETTINGS as Jazz
+from django.conf.global_settings import LANGUAGES as DJANGO_LANGUAGES
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-b^06t^u$1v2t3$etc)dsm_=*z=*9-07(oh3-zi6$nbv#kv*39$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 
 DATE_FORMAT = 'd-m-Y'
@@ -38,10 +39,10 @@ ALLOWED_HOSTS = ["localhost:1235", "127.0.0.1:1235", "127.0.0.1", "localhost"]
 INSTALLED_APPS = [
     'jazzmin',
     'adminPanel.dashboard.apps.DashboardConfig',
-    'adminPanel.dashboard.apps.CustomAuthConfig',
+    #'adminPanel.dashboard.apps.CustomAuthConfig',
     'adminPanel.dashboard.templates',
     'django.contrib.admin',
-    #'django.contrib.auth',
+    'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -77,6 +78,13 @@ TEMPLATES = [
 ]
 
 JAZZMIN_SETTINGS = Jazz
+
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),
+]
+
+LANGUAGES = [    ('en', 'English'),    ('ru', 'Russian'),]
+
 
 WSGI_APPLICATION = 'admin.wsgi.application'
 
@@ -118,12 +126,12 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
-
+USE_L10N = True
 USE_TZ = True
 
 
@@ -156,3 +164,5 @@ EMAIL_HOST_PASSWORD = 'aupucxnpbeuympbk'
 EMAIL_PORT = 465
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
+
+LANGUAGES = DJANGO_LANGUAGES

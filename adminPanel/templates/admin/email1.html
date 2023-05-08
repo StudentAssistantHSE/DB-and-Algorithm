@@ -62,19 +62,19 @@
 
             <li class="nav-item d-none d-sm-inline-block">
 
-                <a class="nav-link" href="/admin/">Home</a>
+                <a class="nav-link" href="/admin/">Главная</a>
 
             </li>
 
             <li class="nav-item d-none d-sm-inline-block">
 
-                <a class="nav-link" href="http://84.201.175.11/" target="_blank">To the site</a>
+                <a class="nav-link" href="http://84.201.175.11/" target="_blank">На сайт</a>
 
             </li>
 
             <li class="nav-item d-none d-sm-inline-block">
 
-                <a class="nav-link" href="/admin/auth/user/">Users</a>
+                <a class="nav-link" href="/admin/auth/user/">Пользователи</a>
 
             </li>
 
@@ -144,158 +144,146 @@
             <span class="brand-text font-weight-light">Student Assistant</span>
         </a>
 
-        <div class="sidebar">
-            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                <div class="image">
+       <div class="sidebar">
+                    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                        <div class="image">
 
-                    <i class="fas fa-inverse user-profile fa-user-circle"></i>
+                                <i class="fas fa-inverse user-profile fa-user-circle"></i>
 
+                        </div>
+                        <div class="info">
+
+                                <a href="/admin/auth/user/1/change/" class="d-block">admin</a>
+
+                        </div>
+                    </div>
+
+                    <nav class="mt-2">
+                        <ul class="nav nav-pills nav-sidebar flex-column " data-widget="treeview" role="menu" data-collapsible="false">
+
+                            <li class="nav-item">
+                                <a href="/admin/" class="nav-link">
+                                    <i class="nav-icon fas fa-th-large"></i>
+                                    <p>Админпанель</p>
+                                </a>
+                            </li>
+
+
+
+                                    <li class="nav-header">Данные</li>
+
+                                        <li class="nav-item">
+
+                                            <a href="/admin/dashboard/projectstimetable/" class="nav-link">
+                                                <i class="nav-icon fas fa-circle"></i> <p>Дедлайны</p>
+                                            </a>
+
+                                        </li>
+
+                                        <li class="nav-item">
+
+                                            <a href="/admin/dashboard/applications/" class="nav-link active">
+                                                <i class="nav-icon fas fa-circle"></i> <p>Заявки</p>
+                                            </a>
+
+                                        </li>
+
+                                        <li class="nav-item">
+
+                                            <a href="/admin/dashboard/users/" class="nav-link">
+                                                <i class="nav-icon fas fa-circle"></i> <p>Пользователи</p>
+                                            </a>
+
+                                        </li>
+
+                                        <li class="nav-item">
+
+                                            <a href="/admin/dashboard/projects/" class="nav-link">
+                                                <i class="nav-icon fas fa-circle"></i> <p>Проекты</p>
+                                            </a>
+
+                                        </li>
+
+                                        <li class="nav-item">
+
+                                            <a href="/admin/dashboard/userrecommendations/" class="nav-link">
+                                                <i class="nav-icon fas fa-circle"></i> <p>Рекомендации пользователям</p>
+                                            </a>
+
+                                        </li>
+
+                                        <li class="nav-item">
+
+                                            <a href="/admin/dashboard/statuses/" class="nav-link">
+                                                <i class="nav-icon fas fa-circle"></i> <p>Статусы</p>
+                                            </a>
+
+                                        </li>
+
+                                        <li class="nav-item">
+
+                                            <a href="/admin/dashboard/categories/" class="nav-link">
+                                                <i class="nav-icon fas fa-circle"></i> <p>Теги</p>
+                                            </a>
+
+                                        </li>
+
+                                        <li class="nav-item">
+
+                                            <a href="/admin/dashboard/usercategories/" class="nav-link">
+                                                <i class="nav-icon fas fa-circle"></i> <p>Теги пользователей</p>
+                                            </a>
+
+                                        </li>
+
+                                        <li class="nav-item">
+
+                                            <a href="/admin/dashboard/projectcategories/" class="nav-link">
+                                                <i class="nav-icon fas fa-circle"></i> <p>Теги проектов</p>
+                                            </a>
+
+                                        </li>
+
+                                        <li class="nav-item">
+
+                                            <a href="/admin/dashboard/faculties/" class="nav-link">
+                                                <i class="nav-icon fas fa-circle"></i> <p>Факультеты</p>
+                                            </a>
+
+                                        </li>
+
+                                        <li class="nav-item">
+
+                                            <a href="/admin/email" class="nav-link">
+                                                <i class="nav-icon fas fa-comments"></i> <p>Уведомления</p>
+                                            </a>
+
+                                        </li>
+
+
+                                    <li class="nav-header">Пользователи и группы</li>
+
+                                        <li class="nav-item">
+
+                                            <a href="/admin/auth/group/" class="nav-link">
+                                                <i class="nav-icon fas fa-users"></i> <p>Группы</p>
+                                            </a>
+
+                                        </li>
+
+                                        <li class="nav-item">
+
+                                            <a href="/admin/auth/user/" class="nav-link">
+                                                <i class="nav-icon fas fa-user"></i> <p>Пользователи</p>
+                                            </a>
+
+                                        </li>
+
+
+
+                        </ul>
+                    </nav>
                 </div>
-                <div class="info">
-
-                    <a class="d-block" href="/admin/auth/user/1/change/">admin</a>
-
-                </div>
-            </div>
-
-            <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column " data-collapsible="false" data-widget="treeview"
-                    role="menu">
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="/admin/">
-                            <i class="nav-icon fas fa-th-large"></i>
-                            <p>Dashboard</p>
-                        </a>
-                    </li>
-
-
-                    <li class="nav-header">Authentication and Authorization</li>
-
-                    <li class="nav-item">
-
-                        <a class="nav-link" href="/admin/auth/group/">
-                            <i class="nav-icon fas fa-users"></i>
-                            <p>Groups</p>
-                        </a>
-
-                    </li>
-
-                    <li class="nav-item">
-
-                        <a class="nav-link" href="/admin/auth/user/">
-                            <i class="nav-icon fas fa-user"></i>
-                            <p>Users</p>
-                        </a>
-
-                    </li>
-
-
-                    <li class="nav-header">Dashboard</li>
-
-                    <li class="nav-item">
-
-                        <a class="nav-link" href="/admin/dashboard/projectstimetable/">
-                            <i class="nav-icon fas fa-circle"></i>
-                            <p>Дедлайны</p>
-                        </a>
-
-                    </li>
-
-                    <li class="nav-item">
-
-                        <a class="nav-link" href="/admin/dashboard/applications/">
-                            <i class="nav-icon fas fa-circle"></i>
-                            <p>Заявки</p>
-                        </a>
-
-                    </li>
-
-                    <li class="nav-item">
-
-                        <a class="nav-link" href="/admin/dashboard/users/">
-                            <i class="nav-icon fas fa-circle"></i>
-                            <p>Пользователи</p>
-                        </a>
-
-                    </li>
-
-                    <li class="nav-item">
-
-                        <a class="nav-link" href="/admin/dashboard/projects/">
-                            <i class="nav-icon fas fa-circle"></i>
-                            <p>Проекты</p>
-                        </a>
-
-                    </li>
-
-                    <li class="nav-item">
-
-                        <a class="nav-link" href="/admin/dashboard/userrecommendations/">
-                            <i class="nav-icon fas fa-circle"></i>
-                            <p>Рекомендации пользователям</p>
-                        </a>
-
-                    </li>
-
-                    <li class="nav-item">
-
-                        <a class="nav-link" href="/admin/dashboard/statuses/">
-                            <i class="nav-icon fas fa-circle"></i>
-                            <p>Статусы</p>
-                        </a>
-
-                    </li>
-
-                    <li class="nav-item">
-
-                        <a class="nav-link" href="/admin/dashboard/categories/">
-                            <i class="nav-icon fas fa-circle"></i>
-                            <p>Теги</p>
-                        </a>
-
-                    </li>
-
-                    <li class="nav-item">
-
-                        <a class="nav-link" href="/admin/dashboard/usercategories/">
-                            <i class="nav-icon fas fa-circle"></i>
-                            <p>Теги пользователей</p>
-                        </a>
-
-                    </li>
-
-                    <li class="nav-item">
-
-                        <a class="nav-link" href="/admin/dashboard/projectcategories/">
-                            <i class="nav-icon fas fa-circle"></i>
-                            <p>Теги проектов</p>
-                        </a>
-
-                    </li>
-
-                    <li class="nav-item">
-
-                        <a class="nav-link" href="/admin/dashboard/faculties/">
-                            <i class="nav-icon fas fa-circle"></i>
-                            <p>Факультеты</p>
-                        </a>
-
-                    </li>
-
-                    <li class="nav-item">
-
-                        <a class="nav-link" href="/admin/email">
-                            <i class="nav-icon fas fa-comments"></i>
-                            <p>Уведомления</p>
-                        </a>
-
-                    </li>
-
-
-                </ul>
-            </nav>
-        </div>
     </aside>
 
 
@@ -309,8 +297,8 @@
                         <h1 class="h4 m-0 pr-3 mr-3 border-right"> Уведомления </h1>
 
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="/admin/">Home</a></li>
-                            <li class="breadcrumb-item"><a href="/admin/dashboard/">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="/admin/">Начало</a></li>
+                            <li class="breadcrumb-item"><a href="/admin/dashboard/">Данные</a></li>
                             <li class="breadcrumb-item active">
                                 Отправить уведомление
                             </li>
@@ -341,7 +329,7 @@
                                                 <div class="form-group field-email">
                                                     <div class="row">
                                                         <label class="col-sm-3 text-left">
-                                                            Email
+                                                            Адрес
                                                             <span class="text-red">* </span>
                                                         </label>
                                                         <div class=" col-sm-7 field-email ">
@@ -370,7 +358,7 @@
                                                 <div class="form-group field-topic">
                                                     <div class="row">
                                                         <label class="col-sm-3 text-left" for="id_topic">
-                                                            Topic
+                                                            Tема
                                                             <span class="text-red">* </span>
                                                         </label>
                                                         <div class=" col-sm-7 field-email ">
@@ -386,7 +374,7 @@
                                                 <div class="form-group field-message">
                                                     <div class="row">
                                                         <label class="col-sm-3 text-left" for="id_message">
-                                                            Message
+                                                            Сообщение
                                                             <span class="text-red">* </span>
                                                         </label>
                                                         <div class=" col-sm-7 field-email ">
@@ -411,7 +399,7 @@
                                                                 <div class="submit-row">
                                                                     <input class="btn btn-info form-control" id="Send"
                                                                            type="Submit"
-                                                                           value="Send Message">
+                                                                           value="Отправить">
                                                                 </div>
                                                                 <div id="my-message"></div>
                                                             </div>

@@ -138,7 +138,4 @@ admin.site.register(ProjectsTimetable, ProjectTimetableAdmin)
 admin.site.register(UserCategories, UserCategoryAdmin)
 admin.site.register(UserRecommendations, UserRecommendationsAdmin)
 admin.site.register(Users, UsersAdmin)
-admin.site.unregister(Group)
-admin.site.unregister(User)
-admin.site.register(UsersRoles, UserAdmin)
-admin.site.register(Role, GroupAdmin)
+

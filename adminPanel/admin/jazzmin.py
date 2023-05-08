@@ -38,10 +38,10 @@ JAZZMIN_SETTINGS = {
     "topmenu_links": [
 
         # Url that gets reversed (Permissions can be added)
-        {"name": "Home",  "url": "admin:index", "permissions": ["auth.view_user"]},
+        {"name": "Главная",  "url": "admin:index", "permissions": ["auth.view_user"]},
 
         # external url that opens in a new window (Permissions can be added)
-        {"name": "To the site", "url": "http://84.201.175.11/", "new_window": True},
+        {"name": "На сайт", "url": "http://84.201.175.11/", "new_window": True},
 
         # model admin to link to (Permissions checked against model)
         {"model": "auth.User"},

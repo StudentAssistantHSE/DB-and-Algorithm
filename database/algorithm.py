@@ -31,9 +31,12 @@ try:
     projectsTags = projectCategoriesController.get_all()
     tagsUnited = list(set().union(*tags))
 
-    df_tf = pd.DataFrame(np.zeros(((projects[-1][0]), len(tags))), columns=tagsUnited)
+    max_value = max(projects, key=lambda x: x[0])[0]
+    df_tf = pd.DataFrame(np.zeros(((max_value), len(tags))), columns=tagsUnited)
     for el in projects:
         tagsOfProject = projectCategoriesController.get_by_project(el[0])
+        if el == 1004:
+            print()
         if len(tagsOfProject) != 0:
             df_tf[tags[tagsOfProject[0][1] - 1][0]][tagsOfProject[0][0]-1] = df_tf[tags[tagsOfProject[0][1] - 1][0]][tagsOfProject[0][0]-1] +\
                                                                    (1 / len(tagsOfProject))
@@ -117,7 +120,7 @@ try:
 
 
 except Exception as err:
-    print(err)
+    raise err
 
 finally:
     conn.close()
