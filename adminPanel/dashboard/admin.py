@@ -10,7 +10,7 @@ from .models import Statuses, Faculties, Applications, Categories, \
     ProjectCategories, Projects, ProjectsTimetable, UserCategories, UserRecommendations, Users, Role, UsersRoles
 
 
-@admin.action(description="Импортировать в Эксель")
+@admin.action(description="Скачать в Эксель")
 def export_to_excel(modeladmin, request, queryset):
     opts = modeladmin.model._meta
     response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')

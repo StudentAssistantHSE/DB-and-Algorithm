@@ -9,7 +9,6 @@ from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 from sklearn.metrics.pairwise import cosine_similarity
 
 from config import DB_NAME, DB_PORT, DB_PASS, DB_HOST, DB_USER
-from recommendationHelpers import SqlRequest
 from recommendationHelpers import AlgorithmOperator
 
 conn = psycopg2.connect(database=DB_NAME, user=DB_USER, port=DB_PORT, password=DB_PASS,
@@ -35,8 +34,6 @@ try:
     df_tf = pd.DataFrame(np.zeros(((max_value), len(tags))), columns=tagsUnited)
     for el in projects:
         tagsOfProject = projectCategoriesController.get_by_project(el[0])
-        if el == 1004:
-            print()
         if len(tagsOfProject) != 0:
             df_tf[tags[tagsOfProject[0][1] - 1][0]][tagsOfProject[0][0]-1] = df_tf[tags[tagsOfProject[0][1] - 1][0]][tagsOfProject[0][0]-1] +\
                                                                    (1 / len(tagsOfProject))

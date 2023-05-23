@@ -33,9 +33,7 @@ try:
                    userRecommendations, projectTimetable]
 
     fill = [DummyData.facultyFill.facultyFill, DummyData.accountFill.accountFill,
-            DummyData.projectFill.projectFill,
-            DummyData.applicationsFill.applicationFill, DummyData.categoryFill.categoryFill,
-            DummyData.accountInterestsFill.accountInterestsFill,
+            DummyData.projectFill.projectFill, DummyData.categoryFill.categoryFill,
             DummyData.projectCategoriesFill.projectCategoriesFill]
 
     # executing query
