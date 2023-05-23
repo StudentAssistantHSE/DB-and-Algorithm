@@ -88,8 +88,8 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 class ProjectsAdmin(admin.ModelAdmin):
-    list_display = ["name", "description"]
-    search_fields = ("name", )
+    list_display = ["name", "description", "contacts", "created_date", "is_closed"]
+    search_fields = ("name", "description", "contacts")
     actions = [export_to_excel]
 
     def getProjects(self, obj):
